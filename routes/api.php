@@ -16,3 +16,17 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::post('/webhook' . env('TELEGRAM_BOT_TOKEN'), function (Request $request) {
+    if ($request->has('message')) {
+        $message = $request->get('message');
+        $chatId = $message['chat']['id'];
+
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => 'ok'
+        ]);
+    }
+
+    return;
+})->name('telegram.webhook');
