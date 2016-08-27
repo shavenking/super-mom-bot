@@ -33,7 +33,7 @@ Route::get('/set-webhook', function () {
 Route::get('/webhook' . env('TELEGRAM_BOT_TOKEN'), function () {
     if (Request::has('message')) {
         $message = Request::get('message');
-        $chatId = Arr::get($message, 'chat.id');
+        $chatId = $message['chat']['id'];
 
         Telegram::sendMessage([
             'chat_id' => $chatId,
