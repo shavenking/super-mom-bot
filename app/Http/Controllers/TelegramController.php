@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Telegram\Bot\Api as Telegram;
 
 use App\Http\Requests;
 
 class TelegramController extends Controller
 {
-    public function webhook(Request $request, Telegram $telegram, Arr $arr)
+    public function webhook(Request $request, Arr $arr)
     {
         if ($request->has('message')) {
             $message = $request->get('message');
